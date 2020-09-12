@@ -24,10 +24,14 @@ public class NewConverter {
 		if(ent.getId() != null) {
 			dto.setId(ent.getId());
 		}
-		dto.setContent(ent.getContent());
-		dto.setShortDescription(ent.getShortDescription());
-		dto.setThumbnail(ent.getThumbnail());
-		dto.setTitle(ent.getTitle());
+		dto.setContent			(ent.getContent());
+		dto.setShortDescription	(ent.getShortDescription());
+		dto.setThumbnail		(ent.getThumbnail());
+		dto.setTitle			(ent.getTitle());
+		dto.setCreateddate		(ent.getCreateddate());
+		dto.setCreatedby		(ent.getCreatedby());
+		dto.setModifieddate		(ent.getModifieddate());
+		dto.setModifiedby		(ent.getModifiedby());
 		
 		return dto;
 	}

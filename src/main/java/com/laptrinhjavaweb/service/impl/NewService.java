@@ -1,6 +1,10 @@
 package com.laptrinhjavaweb.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.laptrinhjavaweb.converter.NewConverter;
@@ -42,17 +46,37 @@ public class NewService implements INewService {
 		
 	}
 
-//	@Override
-//	public NewDTO update(NewDTO newDto) {
-//		NewsEntity oldNew =  newRepository.findOne(newDto.getId());
-//		
-//		if(oldNew == null)	return null;
-//		
-//		NewsEntity newEnt = newConverter.toEntity(newDto, oldNew);
-//		
-//		CategoryEntity categoryEntity = categoryRepository.findOneByCode(newDto.getCategoryCode());
-//		newEnt.setCategory(categoryEntity);
-//		newEnt = newRepository.save(newEnt);
-//		return newConverter.toDTO(newEnt);
-//	}
+	@Override
+	public void delete(long[] ids) {
+		for(long item : ids) {
+			newRepository.delete(item);
+		}
+	}
+
+	@Override
+	public List<NewDTO> findAll(Pageable pageable) {
+		List<NewDTO> results = new ArrayList<>();
+		List<NewsEntity> list = newRepository.findAll(pageable).getContent();
+		for(NewsEntity item : list) {
+			NewDTO dto = newConverter.toDTO(item);
+			results.add(dto);
+		}
+		return results;
+	}
+	
+	@Override
+	public List<NewDTO> findAll() {
+		List<NewDTO> results = new ArrayList<>();
+		List<NewsEntity> list = newRepository.findAll();
+		for(NewsEntity item : list) {
+			NewDTO dto = newConverter.toDTO(item);
+			results.add(dto);
+		}
+		return results;
+	}
+
+	@Override
+	public int totalItem() {
+		return (int)newRepository.count();
+	}
 }
