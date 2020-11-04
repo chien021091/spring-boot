@@ -43,7 +43,6 @@ public class NewService implements INewService {
 		newEntity.setCategory(categoryEntity);
 		newEntity = newRepository.save(newEntity);
 		return newConverter.toDTO(newEntity);
-		
 	}
 
 	@Override
