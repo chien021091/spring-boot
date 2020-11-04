@@ -3,7 +3,6 @@ package com.laptrinhjavaweb.converter;
 import org.springframework.stereotype.Component;
 
 import com.laptrinhjavaweb.dto.PhotoDTO;
-import com.laptrinhjavaweb.entity.NewsEntity;
 import com.laptrinhjavaweb.entity.PhotoEntity;
 
 @Component
@@ -13,6 +12,7 @@ public class PhotoConverter {
 		
 		ent.setTitle(photoDTO.getTitle());
 		ent.setPhoto(photoDTO.getPhoto());
+		ent.setCategoryId(photoDTO.getCategoryId());
 		
 		return ent;
 	}
@@ -28,6 +28,7 @@ public class PhotoConverter {
 		dto.setCreatedby		(ent.getCreatedby());
 		dto.setModifieddate		(ent.getModifieddate());
 		dto.setModifiedby		(ent.getModifiedby());
+		dto.setCategoryId		(ent.getCategoryId());
 		
 		return dto;
 	}
@@ -35,6 +36,7 @@ public class PhotoConverter {
 	public PhotoEntity toEntity(PhotoDTO photoDTO, PhotoEntity ent) {
 		ent.setPhoto(photoDTO.getPhoto());
 		ent.setTitle(photoDTO.getTitle());
+		ent.setCategoryId(photoDTO.getCategoryId());
 		
 		return ent;
 	}

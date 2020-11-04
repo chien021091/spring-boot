@@ -44,8 +44,6 @@ public class PhotoService implements IPhotoService {
 			newEntity = photoConverter.toEntity(photoDto);
 		}
 		
-		CategoryEntity categoryEntity = categoryRepository.findOneByCode(photoDto.getCategoryCode());
-		newEntity.setCategory(categoryEntity);
 		newEntity = photoRepository.save(newEntity);
 		return photoConverter.toDTO(newEntity);
 		
@@ -83,5 +81,14 @@ public class PhotoService implements IPhotoService {
 	@Override
 	public int totalItem() {
 		return (int)photoRepository.count();
+	}
+
+	@Override
+	public PhotoDTO get(long id) {
+		PhotoEntity pEnt = photoRepository.findOne(id);
+		if(pEnt != null) {
+			return photoConverter.toDTO(pEnt);
+		}
+		return null;
 	}
 }

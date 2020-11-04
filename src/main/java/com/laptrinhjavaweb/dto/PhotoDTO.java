@@ -5,6 +5,7 @@ public class PhotoDTO extends AbstractDTO<PhotoDTO> {
 	private String title;
 	private String photo;
 	private String categoryCode;
+	private Integer categoryId;
 	public String getTitle() {
 		return title;
 	}
@@ -22,5 +23,11 @@ public class PhotoDTO extends AbstractDTO<PhotoDTO> {
 	}
 	public void setCategoryCode(String categoryCode) {
 		this.categoryCode = categoryCode;
+	}
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
 	}
 }

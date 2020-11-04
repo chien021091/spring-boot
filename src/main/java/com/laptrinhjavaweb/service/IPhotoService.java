@@ -12,4 +12,5 @@ public interface IPhotoService {
 	List<PhotoDTO> findAll(Pageable pageable);
 	List<PhotoDTO> findAll();
 	int totalItem();
+	PhotoDTO get(long id);
 }

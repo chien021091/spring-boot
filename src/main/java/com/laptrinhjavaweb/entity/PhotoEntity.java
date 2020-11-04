@@ -2,8 +2,6 @@ package com.laptrinhjavaweb.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,9 +13,9 @@ public class PhotoEntity extends BaseEntity {
 	@Column(name="title")
 	private String title;
 	
-	@ManyToOne
-	@JoinColumn(name="category_id")
-	private CategoryEntity category;
+	
+	@Column(name="category_id")
+	private Integer categoryId;
 
 	public String getPhoto() {
 		return photo;
@@ -35,11 +33,12 @@ public class PhotoEntity extends BaseEntity {
 		this.title = title;
 	}
 
-	public CategoryEntity getCategory() {
-		return category;
+	public Integer getCategoryId() {
+		return categoryId;
 	}
 
-	public void setCategory(CategoryEntity category) {
-		this.category = category;
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
 	}
+
 }
