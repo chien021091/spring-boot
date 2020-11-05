@@ -15,8 +15,11 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.Data;
+
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
+@Data
 public abstract class BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,32 +40,4 @@ public abstract class BaseEntity {
 	@Column
 	@LastModifiedBy
 	private String  modifiedby;
-	
-	public Long getId() {
-		return id;
-	}
-	public Date getCreateddate() {
-		return createddate;
-	}
-	public void setCreateddate(Date createddate) {
-		this.createddate = createddate;
-	}
-	public Date getModifieddate() {
-		return modifieddate;
-	}
-	public void setModifieddate(Date modifieddate) {
-		this.modifieddate = modifieddate;
-	}
-	public String getCreatedby() {
-		return createdby;
-	}
-	public void setCreatedby(String createdby) {
-		this.createdby = createdby;
-	}
-	public String getModifiedby() {
-		return modifiedby;
-	}
-	public void setModifiedby(String modifiedby) {
-		this.modifiedby = modifiedby;
-	}
 }

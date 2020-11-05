@@ -1,7 +1,5 @@
 package com.laptrinhjavaweb.converter;
 
-import java.util.Date;
-
 import org.springframework.stereotype.Component;
 
 import com.laptrinhjavaweb.dto.NewDTO;
