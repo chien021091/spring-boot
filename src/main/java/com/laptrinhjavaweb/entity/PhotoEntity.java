@@ -4,8 +4,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
 @Table(name="photo")
+@Data
 public class PhotoEntity extends BaseEntity {
 	@Column(name="photo")
 	private String photo;
@@ -16,29 +19,4 @@ public class PhotoEntity extends BaseEntity {
 	
 	@Column(name="category_id")
 	private Integer categoryId;
-
-	public String getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public Integer getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(Integer categoryId) {
-		this.categoryId = categoryId;
-	}
-
 }

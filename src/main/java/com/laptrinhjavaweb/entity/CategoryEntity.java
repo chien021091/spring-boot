@@ -8,8 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
 @Table(name="category")
+@Data
 public class CategoryEntity extends BaseEntity {
 	
 	@Column(name="name")
@@ -20,21 +23,4 @@ public class CategoryEntity extends BaseEntity {
 	
 	@OneToMany(mappedBy = "category")
 	private List<NewsEntity> news = new ArrayList<NewsEntity>();
-	
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-	
 }
