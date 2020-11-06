@@ -14,6 +14,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
 import lombok.extern.slf4j.Slf4j;
 
+//@Component: Springboot sẽ hiểu đây là 1 Bean (dependency) và sẽ được Spring boot quản lý
+//Khi khởi chạy ứng dụng, tìm thấy @Component, Spring Boot sẽ tạo ra 1 instance và đưa vào trong Application context để quản lý
 @Component
 @Slf4j
 public class JwtTokenProvider {

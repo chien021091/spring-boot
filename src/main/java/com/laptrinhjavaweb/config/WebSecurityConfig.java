@@ -15,12 +15,16 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.laptrinhjavaweb.jwt.JwtAuthenticationFilter;
 import com.laptrinhjavaweb.service.impl.UserService;
 
+//@EnableWebSecurity là 1 @configuration
+//@Configuration là 1 antonation đánh dấu trên 1 class cho phép Spring boot biết đây là nơi định nghĩa các BEAN
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	UserService userService;
 	
+	//@Bean là 1 antonation được đánh dấu trên các methd cho phép Spring boot biết được đây là Bean và sẽ thực hiện đưa Bean và context
+	//@Bean sẽ chỉ nằm trong các class có đánh dấu @Configuration
 	@Bean
 	public JwtAuthenticationFilter jwtAuthenticationFilter() {
 		return new JwtAuthenticationFilter();
@@ -53,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors()// Ngăn chặn request từ một domain khác
 		.and()
 		.authorizeRequests()
-		.antMatchers("/api/login").permitAll() // Cho phép tất cả mọi người truy cập vào địa chỉ này
+		.antMatchers("/api/login").permitAll() // Cho phép tất cả mọi người truy cập vào địa chỉ này (list tất cả các api cần get mà k cần đăng nhập)
 		.anyRequest().authenticated(); // Tất cả các request khác đều cần phải xác thực mới được truy cập
 		
 		// Thêm một lớp Filter kiểm tra jwt

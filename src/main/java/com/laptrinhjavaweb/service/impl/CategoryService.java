@@ -12,6 +12,8 @@ import com.laptrinhjavaweb.entity.CategoryEntity;
 import com.laptrinhjavaweb.repository.CategoryRepository;
 import com.laptrinhjavaweb.service.ICategoryService;
 
+//@Service là 1 bean, đảm bảo cho việc xử lý logique
+//@Repository là 1 bean, đảm bảo cho việc giao tiếp với DB
 @Service
 public class CategoryService implements ICategoryService {
 

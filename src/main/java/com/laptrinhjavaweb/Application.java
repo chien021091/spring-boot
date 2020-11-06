@@ -5,18 +5,32 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
+import org.springframework.context.ApplicationContext;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.laptrinhjavaweb.entity.UserEntity;
 import com.laptrinhjavaweb.repository.UserRepository;
 
+//Nhiệm vụ chính của Spring là tạo ra 1 container chứa các Dependency 
+
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class Application implements CommandLineRunner {
 	public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
+        ApplicationContext appContext = SpringApplication.run(Application.class, args); //tạo ra container , sau đó nó tìm toàn bộ Dependency trong project và injecter vào
+        //Spring đặt tên cho container là ApplicationContext
+        //Các dependency là Bean
+        
+        //Cách để Spring biết đâu là dependency =>> thông qua @Component
+        
+        //Khái niệm Dependency Injection
+        //là việc các Object nên phụ thuộc vào các Abstract class và thể hiện chi tiết của nó sẽ được inject vào lúc runtime
+        
+        //IOC: Inversion of Control: Định nghĩa trước các dependency, mô tả nó và chuyển nó vào trong 1 framework quản lý.
+        //Bất kỳ các class khi khởi tạo, cần dependency gì, framework sẽ tự tìm trong kho và inject vào
+	}
 
 	//CommandLineRunner Một interface của Spring cung cấp, có tác dụng thực hiện một nhiệm vụ khi Spring khởi chạy lần đầu.
+	//Autowired: đơn giản chỉ là khi Spring boot gặp antonation này, nó sẽ tạo ra 1 instance mới(bean) và đặt vào (injecter) khi khởi tạo class hiện tại =>> = new UserRepository()
 	@Autowired
 	UserRepository userRepository;
 	
