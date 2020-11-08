@@ -64,6 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.authorizeRequests()
 			.antMatchers("/api/login").permitAll() // Cho phép tất cả mọi người truy cập vào địa chỉ này (list tất cả các api cần get mà k cần đăng nhập)
 			.antMatchers("/photos").permitAll()
+			.antMatchers("/categorys").permitAll()
 			.anyRequest().authenticated(); // Tất cả các request khác đều cần phải xác thực mới được truy cập
 		
 		// Thêm một lớp Filter kiểm tra jwt

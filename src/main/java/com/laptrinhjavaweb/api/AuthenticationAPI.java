@@ -7,6 +7,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +20,7 @@ import com.laptrinhjavaweb.jwt.JwtTokenProvider;
 import com.laptrinhjavaweb.payload.LoginRequest;
 import com.laptrinhjavaweb.payload.LoginResponse;
 import com.laptrinhjavaweb.payload.RandomStuff;
+import com.laptrinhjavaweb.service.impl.UserService;
 
 ///api/login: Cho phép request mà không cần xác thực.
 ///api/random: Là một api bất kỳ nào đó, phải xác thực mới lấy được thông tin.
@@ -31,6 +34,9 @@ public class AuthenticationAPI {
 	
 	@Autowired
 	private JwtTokenProvider tokenProvider;
+	
+	@Autowired
+	UserService userService;
 	
 	@PostMapping("/login")
 	public LoginResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -49,7 +55,11 @@ public class AuthenticationAPI {
 		
 		// Trả về jwt cho người dùng.
 		String jwt = tokenProvider.generateToken((CustomUserDetails) authentication.getPrincipal());
-		return new LoginResponse(jwt);
+		Long userId = tokenProvider.getUserIdFromJWT(jwt);
+		// Lấy thông tin người dùng từ id
+		UserDetails userDetails = userService.loadUserById(userId);
+		
+		return new LoginResponse(jwt, userDetails);
 	}
 	
 	@GetMapping("/random")
