@@ -3,7 +3,6 @@ package com.laptrinhjavaweb.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +22,6 @@ public class PhotoAPI {
 	@Autowired
 	private IPhotoService photoService; 
 	
-	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping(value = "/photo")
 	public PhotoDTO
 	createNew(@RequestBody PhotoDTO model) {
@@ -31,26 +29,22 @@ public class PhotoAPI {
 		return dto;
 	}
 	
-	@CrossOrigin(origins = "http://localhost:3000")
 	@PutMapping(value="/photo/{id}")
 	public PhotoDTO updateNew(@RequestBody PhotoDTO model, @PathVariable("id") Long id) {
 		model.setId(id);
 		return photoService.save(model);
 	}
 	
-	@CrossOrigin(origins = "http://localhost:3000")
 	@DeleteMapping(value="/photo")
 	public void deleteNew(@RequestBody long[] ids) {
 		photoService.delete(ids);
 	}
 	
-	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping(value="/photo/{id}")
 	public PhotoDTO getPhoto(@PathVariable("id") Long id) {
 		return photoService.get(id);
 	}
 	
-	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping(value="/photos")
 	public PhotoOutput showNew(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "limit", required = false) Integer limit) {
 		PhotoOutput result = new PhotoOutput();

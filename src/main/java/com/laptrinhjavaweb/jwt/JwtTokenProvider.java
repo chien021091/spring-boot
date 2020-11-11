@@ -1,7 +1,10 @@
 package com.laptrinhjavaweb.jwt;
 
 import java.util.Date;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.laptrinhjavaweb.entity.CustomUserDetails;
@@ -20,10 +23,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class JwtTokenProvider {
 	// Đoạn JWT_SECRET này là bí mật, chỉ có phía server biết
-    private final String JWT_SECRET = "chien";
+	@Value("${jwt.secret}")
+    private String JWT_SECRET;
     
   //Thời gian có hiệu lực của chuỗi jwt
-    private final long JWT_EXPIRATION = 604800000L;
+	@Value("${jwt.refreshExpirationDateInMs}")
+    private long JWT_EXPIRATION;
     
  // Tạo ra jwt từ thông tin user
     public String generateToken(CustomUserDetails userDetails) {
@@ -36,8 +41,8 @@ public class JwtTokenProvider {
     			.setExpiration(expiryDate)
     			.signWith(SignatureAlgorithm.HS512, JWT_SECRET)
     			.compact();
-    	
     }
+    
     
  // Lấy thông tin user từ jwt
     public Long getUserIdFromJWT(String token) {

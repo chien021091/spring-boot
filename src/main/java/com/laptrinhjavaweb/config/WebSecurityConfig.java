@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -23,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	UserService userService;
 	
-	//@Bean là 1 antonation được đánh dấu trên các methd cho phép Spring boot biết được đây là Bean và sẽ thực hiện đưa Bean và context
+	//@Bean là 1 antonation được đánh dấu trên các method cho phép Spring boot biết được đây là Bean và sẽ thực hiện đưa Bean và context
 	//@Bean sẽ chỉ nằm trong các class có đánh dấu @Configuration
 	@Bean
 	public JwtAuthenticationFilter jwtAuthenticationFilter() {
@@ -54,14 +55,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		
-		http.cors()// Ngăn chặn request từ một domain khác
-		.and()
+		// No session will be created or used by spring security
+	    http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		
+		http
+		.cors()// Ngăn chặn request từ một domain khác
+			.and()
 		.authorizeRequests()
-		.antMatchers("/api/login").permitAll() // Cho phép tất cả mọi người truy cập vào địa chỉ này (list tất cả các api cần get mà k cần đăng nhập)
-		.anyRequest().authenticated(); // Tất cả các request khác đều cần phải xác thực mới được truy cập
+			.antMatchers("/api/login").permitAll() // Cho phép tất cả mọi người truy cập vào địa chỉ này (list tất cả các api cần get mà k cần đăng nhập)
+			.antMatchers("/photos").permitAll()
+			.antMatchers("/categorys").permitAll()
+			.anyRequest().authenticated(); // Tất cả các request khác đều cần phải xác thực mới được truy cập
 		
 		// Thêm một lớp Filter kiểm tra jwt
 		http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
-	
 }
