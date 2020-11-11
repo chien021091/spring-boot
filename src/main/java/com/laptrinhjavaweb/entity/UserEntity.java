@@ -17,6 +17,9 @@ import lombok.Data;
 @Data
 public class UserEntity extends BaseEntity {
 	
+	public static final int STAT_ACTIVE 	= 1;
+	public static final int STAT_DEACTIVE 	= 2;
+	
 	@Column(name="username")
 	private String userName;
 	
@@ -35,6 +38,5 @@ public class UserEntity extends BaseEntity {
 				joinColumns = @JoinColumn(name="user_id"),
 				inverseJoinColumns = @JoinColumn(name="role_id")
 			)
-	
 	private List<RoleEntity> roles = new ArrayList<RoleEntity>();
 }

@@ -8,7 +8,9 @@ import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.laptrinhjavaweb.entity.CategoryEntity;
 import com.laptrinhjavaweb.entity.UserEntity;
+import com.laptrinhjavaweb.repository.CategoryRepository;
 import com.laptrinhjavaweb.repository.UserRepository;
 
 //Nhiệm vụ chính của Spring là tạo ra 1 container chứa các Dependency 
@@ -37,14 +39,31 @@ public class Application implements CommandLineRunner {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
+	@Autowired 
+	CategoryRepository categoryRepository;
+	
 	@Override
 	public void run(String... args) throws Exception {
+//		//add an user to table
 //		UserEntity user = new UserEntity();
 //		user.setUserName("qchien.tran");
 //		user.setPassword(passwordEncoder.encode("qchien.tran"));
+//		user.setStatus(UserEntity.STAT_ACTIVE);
 //		userRepository.save(user);
 //		
-//		System.out.println(user);
+//		
+//		//add category to tab
+//		String[] codeCat = {"technology", "education", "nature", "animals", "styles"};
+//		String[] nameCat = {"Technology", "Education", "Nature", "Animals", "Styles"}; 
+//		for(int i = 0; i< 5; i++) {
+//			CategoryEntity cat = new CategoryEntity();
+//			cat.setCode(codeCat[i]);
+//			cat.setName(nameCat[i]);
+//			
+//			categoryRepository.save(cat);
+//		}
+		
+		
 	}
 	
 	
